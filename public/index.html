@@ -582,13 +582,66 @@
         <div class="section-heading">
           <span class="eyebrow">MVP architecture</span>
           <h2 id="architecture-title">Business Intake -> AI Risk Analysis -> Readiness Score -> Policy Report -> Feedback</h2>
+          <p>
+            The MVP turns user input into a Gemini-powered compliance workflow,
+            stores useful artifacts, and loops tester feedback into validation.
+          </p>
         </div>
-        <div class="architecture-flow" aria-label="MVP architecture flow">
-          <span>Business Intake</span>
-          <span>AI Risk Analysis</span>
-          <span>Readiness Score</span>
-          <span>Policy Report</span>
-          <span>Feedback</span>
+
+        <div class="architecture-board" aria-label="Animated MVP architecture diagram">
+          <div class="architecture-pipeline">
+            <div class="flow-line" aria-hidden="true">
+              <span></span>
+            </div>
+            <article class="flow-node">
+              <span class="node-step">1</span>
+              <strong>Business Intake</strong>
+              <p>Owner enters AI uses, data practices, vendors, policy status, and concerns.</p>
+            </article>
+            <article class="flow-node">
+              <span class="node-step">2</span>
+              <strong>AI Risk Analysis</strong>
+              <p>Express validates answers and builds a structured Gemini prompt.</p>
+            </article>
+            <article class="flow-node">
+              <span class="node-step">3</span>
+              <strong>Readiness Score</strong>
+              <p>Backend applies transparent scoring rules and assigns a risk level.</p>
+            </article>
+            <article class="flow-node">
+              <span class="node-step">4</span>
+              <strong>Policy Report</strong>
+              <p>Gemini generates policy language, disclosures, checklists, and next steps.</p>
+            </article>
+            <article class="flow-node">
+              <span class="node-step">5</span>
+              <strong>Feedback</strong>
+              <p>Tester ratings feed the public validation wall and pilot brief.</p>
+            </article>
+          </div>
+
+          <div class="architecture-details">
+            <article class="architecture-card">
+              <span>Frontend</span>
+              <strong>HTML + CSS + Vanilla JS</strong>
+              <p>Single-page intake, report dashboard, export tools, pricing demo, and feedback display.</p>
+            </article>
+            <article class="architecture-card">
+              <span>Backend</span>
+              <strong>Node.js + Express</strong>
+              <p>API endpoints validate input, calculate scores, call Gemini, and store local JSON data.</p>
+            </article>
+            <article class="architecture-card">
+              <span>AI Layer</span>
+              <strong>Gemini API</strong>
+              <p>Generates compliance readiness reports and pilot validation briefs from live MVP data.</p>
+            </article>
+            <article class="architecture-card">
+              <span>Storage</span>
+              <strong>data/reports.json</strong>
+              <p>Stores report metadata and tester feedback for MVP evidence without a database.</p>
+            </article>
+          </div>
         </div>
       </section>
     </main>

@@ -17,6 +17,7 @@ RegReady AI is a testable MVP / proof of concept for a COMP630 Technology Entrep
 - Pricing model section with MVP-stage upgrade messaging
 - Target customer and beachhead market section
 - Pilot roadmap, current ask, and Gemini-generated pilot validation brief
+- Animated MVP architecture diagram for demo screenshots
 - One-click BrightCare demo button that fills and generates a sample report
 - Local JSON storage in `data/reports.json`
 - Rotating sample test case button with multiple business scenarios

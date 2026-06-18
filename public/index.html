@@ -20,6 +20,7 @@
         <a href="#how-it-works">Workflow</a>
         <a href="#pricing">Pricing</a>
         <a href="#market">Market</a>
+        <a href="#pilot">Pilot</a>
         <a href="#scan">Scan</a>
         <a href="#architecture">Architecture</a>
       </nav>
@@ -502,6 +503,48 @@
           <button class="button button-primary" type="submit">Submit Feedback</button>
           <p class="feedback-message" id="feedbackMessage"></p>
         </form>
+
+        <div class="feedback-wall">
+          <div class="feedback-wall-header">
+            <div>
+              <span class="eyebrow">MVP validation</span>
+              <h3>Recent tester feedback</h3>
+            </div>
+            <button class="button button-ghost button-small" type="button" id="refreshFeedbackButton">
+              Refresh
+            </button>
+          </div>
+          <div class="feedback-list" id="feedbackList">
+            <article class="empty-feedback">
+              Submit feedback after a report to start building validation evidence.
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section pilot-section" id="pilot" aria-labelledby="pilot-title">
+        <div class="section-heading">
+          <span class="eyebrow">Pilot plan</span>
+          <h2 id="pilot-title">Next validation steps</h2>
+          <p>
+            These are the near-term milestones RegReady AI would use to prove
+            repeatable demand and improve report quality.
+          </p>
+        </div>
+        <div class="pilot-grid">
+          <article><span>1</span><p>Test MVP with 5-10 users</p></article>
+          <article><span>2</span><p>Refine prompts and report output</p></article>
+          <article><span>3</span><p>Run pricing test</p></article>
+          <article><span>4</span><p>Build three vertical templates</p></article>
+          <article><span>5</span><p>Prepare consultant pilot</p></article>
+        </div>
+        <div class="ask-panel">
+          <h3>Current ask</h3>
+          <p>
+            Feedback, pilot users, and seed/pilot funding to validate repeatable
+            small-business AI compliance readiness.
+          </p>
+        </div>
       </section>
 
       <section class="section architecture-section" id="architecture" aria-labelledby="architecture-title">

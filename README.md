@@ -13,8 +13,10 @@ RegReady AI is a testable MVP / proof of concept for a COMP630 Technology Entrep
 - Structured report sections for policy, employee guidance, customer disclosure, vendor questions, and next steps
 - Copy, download, and print report actions
 - Feedback rating workflow
+- Public recent feedback display for MVP validation evidence
 - Pricing model section with MVP-stage upgrade messaging
 - Target customer and beachhead market section
+- Pilot roadmap and current ask section for the investor demo
 - One-click BrightCare demo button that fills and generates a sample report
 - Local JSON storage in `data/reports.json`
 - Rotating sample test case button with multiple business scenarios
@@ -117,6 +119,24 @@ Accepts:
 ```
 
 Stores feedback in `data/reports.json`.
+
+### `GET /api/feedback`
+
+Returns the latest tester feedback for display on the website:
+
+```json
+{
+  "success": true,
+  "feedback": [
+    {
+      "businessName": "BrightCare Clinic",
+      "rating": 5,
+      "comment": "Useful report",
+      "createdAt": "2026-06-18T14:00:00.000Z"
+    }
+  ]
+}
+```
 
 ## Scoring Logic
 

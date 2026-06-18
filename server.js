@@ -331,6 +331,25 @@ app.post("/api/feedback", (req, res) => {
   });
 });
 
+app.get("/api/feedback", (req, res) => {
+  const storage = readStorage();
+  const feedback = storage.feedback
+    .slice()
+    .reverse()
+    .slice(0, 10)
+    .map((item) => ({
+      businessName: item.businessName,
+      rating: item.rating,
+      comment: item.comment,
+      createdAt: item.createdAt
+    }));
+
+  res.json({
+    success: true,
+    feedback
+  });
+});
+
 ensureStorage();
 
 app.listen(PORT, () => {

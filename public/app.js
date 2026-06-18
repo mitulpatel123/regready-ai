@@ -17,6 +17,7 @@ const policyInsight = document.getElementById("policyInsight");
 const vendorInsight = document.getElementById("vendorInsight");
 const submitButton = document.getElementById("submitButton");
 const feedbackMessage = document.getElementById("feedbackMessage");
+const feedbackList = document.getElementById("feedbackList");
 const upgradeToast = document.getElementById("upgradeToast");
 
 let latestReport = "";
@@ -418,6 +419,62 @@ function showUpgradeMessage() {
   }, 6000);
 }
 
+function formatDate(value) {
+  if (!value) return "";
+  return new Date(value).toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+
+function renderFeedbackList(feedback) {
+  if (!feedback.length) {
+    feedbackList.innerHTML =
+      '<article class="empty-feedback">Submit feedback after a report to start building validation evidence.</article>';
+    return;
+  }
+
+  feedbackList.innerHTML = feedback
+    .map((item) => {
+      const stars = "★".repeat(item.rating) + "☆".repeat(5 - item.rating);
+      const safeBusiness = String(item.businessName || "MVP tester")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      const safeComment = String(item.comment || "No written comment provided.")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+      return `
+        <article class="feedback-card">
+          <div class="feedback-card-top">
+            <strong>${safeBusiness}</strong>
+            <span>${stars}</span>
+          </div>
+          <p>${safeComment}</p>
+          <time>${formatDate(item.createdAt)}</time>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+async function loadFeedbackList() {
+  try {
+    const response = await fetch("/api/feedback");
+    const data = await response.json();
+    if (!response.ok || !data.success) {
+      throw new Error("Feedback could not be loaded.");
+    }
+    renderFeedbackList(data.feedback);
+  } catch (error) {
+    feedbackList.innerHTML =
+      '<article class="empty-feedback">Feedback is unavailable right now.</article>';
+  }
+}
+
 document.getElementById("startScanButton").addEventListener("click", () => {
   scrollToSection("scan");
 });
@@ -435,6 +492,10 @@ document
 document.querySelectorAll(".pricing-button").forEach((button) => {
   button.addEventListener("click", showUpgradeMessage);
 });
+
+document
+  .getElementById("refreshFeedbackButton")
+  .addEventListener("click", loadFeedbackList);
 
 document.getElementById("copyReportButton").addEventListener("click", async () => {
   if (!latestReport) return;
@@ -518,7 +579,10 @@ feedbackForm.addEventListener("submit", async (event) => {
 
     feedbackMessage.textContent = data.message;
     feedbackForm.reset();
+    loadFeedbackList();
   } catch (error) {
     feedbackMessage.textContent = error.message;
   }
 });
+
+loadFeedbackList();

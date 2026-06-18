@@ -896,6 +896,120 @@ textarea:focus {
   gap: 18px;
 }
 
+.feedback-wall {
+  margin-top: 22px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: clamp(18px, 3vw, 26px);
+  background: var(--white);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.feedback-wall-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.feedback-wall-header h3 {
+  margin: 10px 0 0;
+  font-size: 1.35rem;
+}
+
+.feedback-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.feedback-card,
+.empty-feedback {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: #fbfdff;
+}
+
+.feedback-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.feedback-card-top strong {
+  color: var(--blue-950);
+}
+
+.feedback-card-top span {
+  color: var(--amber-700);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.feedback-card p {
+  margin-bottom: 12px;
+  color: var(--gray-700);
+}
+
+.feedback-card time,
+.empty-feedback {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.pilot-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.pilot-grid article,
+.ask-panel {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.pilot-grid article {
+  min-height: 142px;
+  padding: 18px;
+}
+
+.pilot-grid span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: var(--blue-900);
+  color: var(--white);
+  font-weight: 850;
+}
+
+.pilot-grid p {
+  margin: 0;
+  color: var(--gray-700);
+  font-weight: 700;
+}
+
+.ask-panel {
+  margin-top: 16px;
+  border-left: 5px solid var(--green-600);
+  padding: 22px;
+}
+
+.ask-panel p {
+  margin: 0;
+  color: var(--gray-700);
+}
+
 .architecture-flow {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
@@ -975,6 +1089,8 @@ textarea:focus {
   .question-grid,
   .report-dashboard,
   .insight-grid,
+  .feedback-list,
+  .pilot-grid,
   .architecture-flow {
     grid-template-columns: 1fr;
   }
@@ -989,6 +1105,10 @@ textarea:focus {
   }
 
   .report-shell-header {
+    flex-direction: column;
+  }
+
+  .feedback-wall-header {
     flex-direction: column;
   }
 }

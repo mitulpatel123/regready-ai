@@ -18,6 +18,10 @@ const vendorInsight = document.getElementById("vendorInsight");
 const submitButton = document.getElementById("submitButton");
 const feedbackMessage = document.getElementById("feedbackMessage");
 const feedbackList = document.getElementById("feedbackList");
+const generatePilotPlanButton = document.getElementById("generatePilotPlanButton");
+const pilotLoading = document.getElementById("pilotLoading");
+const pilotError = document.getElementById("pilotError");
+const pilotOutput = document.getElementById("pilotOutput");
 const upgradeToast = document.getElementById("upgradeToast");
 
 let latestReport = "";
@@ -461,6 +465,28 @@ function renderFeedbackList(feedback) {
     .join("");
 }
 
+function formatGeneratedBrief(text) {
+  const escaped = String(text || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/<strong>(AI PILOT VALIDATION BRIEF)<\/strong>/g, "$1")
+    .replace(/<strong>(\d+\.\s[^<]+)<\/strong>/g, "$1")
+    .replace(/^-\s(.+)$/gm, '<span class="report-bullet">$1</span>');
+
+  return escaped.replace(
+    /(^|\n)(AI PILOT VALIDATION BRIEF|\d+\.\s[^\n]+)/g,
+    (match, prefix, heading) => {
+      if (heading === "AI PILOT VALIDATION BRIEF") {
+        return `${prefix}<div class="pilot-output-title">${heading}</div>`;
+      }
+      return `${prefix}<h4>${heading}</h4>`;
+    }
+  );
+}
+
 async function loadFeedbackList() {
   try {
     const response = await fetch("/api/feedback");
@@ -472,6 +498,40 @@ async function loadFeedbackList() {
   } catch (error) {
     feedbackList.innerHTML =
       '<article class="empty-feedback">Feedback is unavailable right now.</article>';
+  }
+}
+
+async function generatePilotPlan() {
+  generatePilotPlanButton.disabled = true;
+  pilotLoading.classList.remove("hidden");
+  pilotError.classList.add("hidden");
+  pilotOutput.classList.add("hidden");
+
+  try {
+    const response = await fetch("/api/generate-pilot-plan", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+    });
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Pilot plan generation failed.");
+    }
+
+    pilotOutput.innerHTML = `
+      <div class="pilot-stats">
+        <span>${data.stats.reportCount} saved reports analyzed</span>
+        <span>${data.stats.feedbackCount} feedback entries analyzed</span>
+      </div>
+      ${formatGeneratedBrief(data.pilotPlan)}
+    `;
+    pilotOutput.classList.remove("hidden");
+  } catch (error) {
+    pilotError.textContent = error.message;
+    pilotError.classList.remove("hidden");
+  } finally {
+    pilotLoading.classList.add("hidden");
+    generatePilotPlanButton.disabled = false;
   }
 }
 
@@ -496,6 +556,8 @@ document.querySelectorAll(".pricing-button").forEach((button) => {
 document
   .getElementById("refreshFeedbackButton")
   .addEventListener("click", loadFeedbackList);
+
+generatePilotPlanButton.addEventListener("click", generatePilotPlan);
 
 document.getElementById("copyReportButton").addEventListener("click", async () => {
   if (!latestReport) return;

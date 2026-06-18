@@ -16,7 +16,7 @@ RegReady AI is a testable MVP / proof of concept for a COMP630 Technology Entrep
 - Public recent feedback display for MVP validation evidence
 - Pricing model section with MVP-stage upgrade messaging
 - Target customer and beachhead market section
-- Pilot roadmap and current ask section for the investor demo
+- Pilot roadmap, current ask, and Gemini-generated pilot validation brief
 - One-click BrightCare demo button that fills and generates a sample report
 - Local JSON storage in `data/reports.json`
 - Rotating sample test case button with multiple business scenarios
@@ -94,7 +94,7 @@ Returns:
 
 ### `POST /api/generate-report`
 
-Accepts JSON intake form data and returns:
+Accepts JSON intake form data, sends a structured prompt to Gemini, and returns:
 
 ```json
 {
@@ -119,6 +119,22 @@ Accepts:
 ```
 
 Stores feedback in `data/reports.json`.
+
+### `POST /api/generate-pilot-plan`
+
+Uses Gemini to analyze saved reports and tester feedback, then returns a pilot validation brief:
+
+```json
+{
+  "success": true,
+  "pilotPlan": "AI PILOT VALIDATION BRIEF...",
+  "createdAt": "2026-06-18T14:00:00.000Z",
+  "stats": {
+    "reportCount": 5,
+    "feedbackCount": 5
+  }
+}
+```
 
 ### `GET /api/feedback`
 

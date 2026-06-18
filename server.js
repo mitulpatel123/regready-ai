@@ -176,6 +176,80 @@ State that this report is educational and not legal advice.
 `.trim();
 }
 
+function buildPilotPrompt(storage) {
+  const reports = storage.reports.slice(-12).map((report) => ({
+    businessName: report.businessName,
+    businessType: report.businessType,
+    score: report.score,
+    riskLevel: report.riskLevel,
+    createdAt: report.createdAt
+  }));
+  const feedback = storage.feedback.slice(-20).map((item) => ({
+    businessName: item.businessName,
+    rating: item.rating,
+    comment: item.comment,
+    createdAt: item.createdAt
+  }));
+  const averageRating =
+    feedback.length > 0
+      ? feedback.reduce((sum, item) => sum + Number(item.rating || 0), 0) /
+        feedback.length
+      : 0;
+
+  return `
+You are RegReady AI's startup pilot planning assistant.
+
+Use the MVP validation data below to generate a concise pilot validation brief for an investor demo.
+Do not invent exact customer commitments. If data is limited, say what should be tested next.
+Keep this practical, business-focused, and useful for a COMP630 Technology Entrepreneurship final project.
+
+Stored MVP data:
+- Total generated reports available for analysis: ${storage.reports.length}
+- Recent report summaries: ${JSON.stringify(reports, null, 2)}
+- Total feedback entries available for analysis: ${storage.feedback.length}
+- Average feedback rating: ${averageRating ? averageRating.toFixed(1) : "No ratings yet"}/5
+- Recent feedback: ${JSON.stringify(feedback, null, 2)}
+
+Static validation milestones to incorporate:
+- Test MVP with 5-10 users
+- Refine prompts and report output
+- Run pricing test
+- Build three vertical templates
+- Prepare consultant pilot
+
+Current ask:
+- Feedback
+- Pilot users
+- Seed/pilot funding to validate repeatable small-business AI compliance readiness
+
+Generate the output with these exact sections:
+Do not use markdown heading hashes such as ###.
+
+AI PILOT VALIDATION BRIEF
+
+1. Validation Snapshot
+Summarize what the current MVP data suggests.
+
+2. Feedback Signals
+Summarize useful patterns from tester ratings and comments. If feedback is thin, explain what feedback should be collected next.
+
+3. Prompt and Report Refinements
+Recommend specific improvements to the AI prompt or generated report.
+
+4. Pricing Test Plan
+Recommend a simple pricing test for Free Scan, Basic Report, Monthly Plan, and Consultant Plan.
+
+5. Vertical Template Priorities
+Recommend three vertical templates to build first and why.
+
+6. Consultant Pilot Plan
+Describe a small consultant pilot and how success should be measured.
+
+7. Current Ask
+State the ask for feedback, pilot users, and seed/pilot funding.
+`.trim();
+}
+
 function getGeminiModelsToTry() {
   const configured = process.env.GEMINI_MODEL || "gemini-flash-latest";
   const fallbackModels = [
@@ -348,6 +422,32 @@ app.get("/api/feedback", (req, res) => {
     success: true,
     feedback
   });
+});
+
+app.post("/api/generate-pilot-plan", async (req, res) => {
+  const storage = readStorage();
+  const createdAt = new Date().toISOString();
+  const prompt = buildPilotPrompt(storage);
+
+  try {
+    const pilotPlan = await callGemini(prompt);
+    res.json({
+      success: true,
+      pilotPlan,
+      createdAt,
+      stats: {
+        reportCount: storage.reports.length,
+        feedbackCount: storage.feedback.length
+      }
+    });
+  } catch (error) {
+    res.status(502).json({
+      success: false,
+      message:
+        "The AI service could not generate pilot insights right now. Check your Gemini API key and try again.",
+      detail: error.message
+    });
+  }
 });
 
 ensureStorage();

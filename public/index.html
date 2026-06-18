@@ -550,6 +550,26 @@
             readiness before scaling the product.
           </p>
         </div>
+
+        <div class="pilot-ai-panel">
+          <div>
+            <span class="eyebrow">Gemini-powered pilot brief</span>
+            <h3>Generate pilot insights from reports and feedback</h3>
+            <p>
+              This uses the Gemini API to analyze saved MVP reports and tester
+              feedback, then creates a short validation brief for the final demo.
+            </p>
+          </div>
+          <button class="button button-primary" type="button" id="generatePilotPlanButton">
+            Generate AI Pilot Brief
+          </button>
+        </div>
+        <div class="pilot-loading hidden" id="pilotLoading">
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Generating pilot validation brief with Gemini...</p>
+        </div>
+        <div class="error-box hidden" id="pilotError"></div>
+        <article class="pilot-output hidden" id="pilotOutput"></article>
       </section>
 
       <section class="section architecture-section" id="architecture" aria-labelledby="architecture-title">

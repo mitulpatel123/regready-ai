@@ -887,7 +887,7 @@ textarea:focus {
   position: absolute;
   left: 2px;
   color: var(--green-600);
-  content: "\\2022";
+  content: "\2022";
   font-weight: 900;
 }
 
@@ -916,6 +916,12 @@ textarea:focus {
 .feedback-wall-header h3 {
   margin: 10px 0 0;
   font-size: 1.35rem;
+}
+
+.feedback-wall-header p {
+  margin: 6px 0 0;
+  color: var(--gray-600);
+  font-weight: 650;
 }
 
 .feedback-list {

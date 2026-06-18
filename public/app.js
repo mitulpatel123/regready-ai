@@ -18,6 +18,7 @@ const vendorInsight = document.getElementById("vendorInsight");
 const submitButton = document.getElementById("submitButton");
 const feedbackMessage = document.getElementById("feedbackMessage");
 const feedbackList = document.getElementById("feedbackList");
+const feedbackStats = document.getElementById("feedbackStats");
 const generatePilotPlanButton = document.getElementById("generatePilotPlanButton");
 const pilotLoading = document.getElementById("pilotLoading");
 const pilotError = document.getElementById("pilotError");
@@ -214,7 +215,6 @@ function setLoading(isLoading) {
   errorBox.classList.add("hidden");
   if (isLoading) {
     reportOutput.classList.add("hidden");
-    feedbackSection.classList.add("hidden");
   }
 }
 
@@ -323,7 +323,6 @@ function displayReport(data) {
   reportText.innerHTML = formatReport(data.report);
   loadingBox.classList.add("hidden");
   reportOutput.classList.remove("hidden");
-  feedbackSection.classList.remove("hidden");
   scrollToSection("reportSection");
 }
 
@@ -465,6 +464,15 @@ function renderFeedbackList(feedback) {
     .join("");
 }
 
+function renderFeedbackStats(stats) {
+  const count = stats?.count || 0;
+  const average = stats?.averageRating || 0;
+  feedbackStats.textContent =
+    count === 0
+      ? "No tester feedback yet."
+      : `${count} feedback entr${count === 1 ? "y" : "ies"} collected. Average rating: ${average}/5.`;
+}
+
 function formatGeneratedBrief(text) {
   const escaped = String(text || "")
     .replace(/&/g, "&amp;")
@@ -494,8 +502,10 @@ async function loadFeedbackList() {
     if (!response.ok || !data.success) {
       throw new Error("Feedback could not be loaded.");
     }
+    renderFeedbackStats(data.stats);
     renderFeedbackList(data.feedback);
   } catch (error) {
+    feedbackStats.textContent = "Feedback could not be loaded.";
     feedbackList.innerHTML =
       '<article class="empty-feedback">Feedback is unavailable right now.</article>';
   }
@@ -576,7 +586,6 @@ document.getElementById("printReportButton").addEventListener("click", () => {
 
 document.getElementById("newScanButton").addEventListener("click", () => {
   reportSection.classList.add("hidden");
-  feedbackSection.classList.add("hidden");
   feedbackMessage.textContent = "";
   scrollToSection("scan");
 });

@@ -20,6 +20,7 @@
         <a href="#how-it-works">Workflow</a>
         <a href="#pricing">Pricing</a>
         <a href="#market">Market</a>
+        <a href="#feedbackSection">Feedback</a>
         <a href="#pilot">Pilot</a>
         <a href="#scan">Scan</a>
         <a href="#architecture">Architecture</a>
@@ -475,10 +476,14 @@
         </div>
       </section>
 
-      <section class="section feedback-section hidden" id="feedbackSection">
+      <section class="section feedback-section" id="feedbackSection">
         <div class="section-heading">
           <span class="eyebrow">Tester feedback</span>
           <h2>Rate report usefulness</h2>
+          <p>
+            New visitors can review available MVP tester feedback before running
+            a scan. Submitted feedback appears below after refresh.
+          </p>
         </div>
         <form class="feedback-form" id="feedbackForm">
           <label>
@@ -509,6 +514,7 @@
             <div>
               <span class="eyebrow">MVP validation</span>
               <h3>Recent tester feedback</h3>
+              <p id="feedbackStats">Loading feedback...</p>
             </div>
             <button class="button button-ghost button-small" type="button" id="refreshFeedbackButton">
               Refresh

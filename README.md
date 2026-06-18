@@ -13,7 +13,7 @@ RegReady AI is a testable MVP / proof of concept for a COMP630 Technology Entrep
 - Structured report sections for policy, employee guidance, customer disclosure, vendor questions, and next steps
 - Copy, download, and print report actions
 - Feedback rating workflow
-- Public recent feedback display for MVP validation evidence
+- Public feedback display with count and average rating for MVP validation evidence
 - Pricing model section with MVP-stage upgrade messaging
 - Target customer and beachhead market section
 - Pilot roadmap, current ask, and Gemini-generated pilot validation brief

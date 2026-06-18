@@ -410,16 +410,24 @@ app.get("/api/feedback", (req, res) => {
   const feedback = storage.feedback
     .slice()
     .reverse()
-    .slice(0, 10)
     .map((item) => ({
       businessName: item.businessName,
       rating: item.rating,
       comment: item.comment,
       createdAt: item.createdAt
     }));
+  const averageRating =
+    feedback.length > 0
+      ? feedback.reduce((sum, item) => sum + Number(item.rating || 0), 0) /
+        feedback.length
+      : 0;
 
   res.json({
     success: true,
+    stats: {
+      count: feedback.length,
+      averageRating: Number(averageRating.toFixed(1))
+    },
     feedback
   });
 });

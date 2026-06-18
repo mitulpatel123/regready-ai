@@ -1005,6 +1005,22 @@ textarea:focus {
   padding: 22px;
 }
 
+.ask-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.ask-list span {
+  border: 1px solid rgba(17, 132, 91, 0.22);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: var(--green-100);
+  color: var(--green-600);
+  font-weight: 850;
+}
+
 .ask-panel p {
   margin: 0;
   color: var(--gray-700);

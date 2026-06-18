@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RegReady AI | Compliance Readiness Assistant</title>
+    <meta
+      name="description"
+      content="RegReady AI helps small businesses generate AI compliance readiness reports."
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#hero" aria-label="RegReady AI home">
+        <span class="brand-mark">R</span>
+        <span>RegReady AI</span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="#how-it-works">Workflow</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#market">Market</a>
+        <a href="#scan">Scan</a>
+        <a href="#architecture">Architecture</a>
+      </nav>
+      <button class="button button-small button-primary" id="headerStartButton">
+        Start Scan
+      </button>
+    </header>
+
+    <main>
+      <section class="hero-section" id="hero">
+        <div class="hero-overlay">
+          <div class="hero-content">
+            <span class="eyebrow">Built for COMP630 Final MVP Demo</span>
+            <h1>RegReady AI</h1>
+            <p class="tagline">
+              AI Compliance Readiness Assistant for Small Businesses
+            </p>
+            <p class="hero-copy">
+              RegReady AI helps small businesses understand AI-use risks and
+              generate practical policies, employee guidance, disclosure
+              language, vendor-risk questions, and a compliance readiness score.
+            </p>
+            <div class="hero-actions">
+              <button class="button button-primary" id="startScanButton">
+                Start Readiness Scan
+              </button>
+              <button class="button button-secondary" id="sampleHeroButton">
+                Load Random Sample
+              </button>
+              <button class="button button-secondary" id="trySampleBusinessButton">
+                Try Sample Business
+              </button>
+            </div>
+          </div>
+
+          <aside class="hero-dashboard" aria-label="RegReady AI dashboard preview">
+            <div class="preview-top">
+              <span>Readiness Preview</span>
+              <strong>68</strong>
+            </div>
+            <div class="preview-meter">
+              <span style="width: 68%"></span>
+            </div>
+            <div class="preview-grid">
+              <div><span>Policy</span><strong>Drafted</strong></div>
+              <div><span>Risk</span><strong>Moderate</strong></div>
+              <div><span>Vendors</span><strong>Review</strong></div>
+              <div><span>Disclosure</span><strong>Needed</strong></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section value-section" aria-labelledby="value-title">
+        <div class="section-heading">
+          <span class="eyebrow">MVP output</span>
+          <h2 id="value-title">What the scan generates</h2>
+        </div>
+        <div class="value-grid">
+          <article class="value-card">
+            <span class="icon">P</span>
+            <h3>AI Use Policy Draft</h3>
+            <p>Short employee-ready policy language for responsible AI use.</p>
+          </article>
+          <article class="value-card">
+            <span class="icon">R</span>
+            <h3>Risk Checklist</h3>
+            <p>Plain-English risks across privacy, disclosure, vendors, and trust.</p>
+          </article>
+          <article class="value-card">
+            <span class="icon">G</span>
+            <h3>Employee Guidance</h3>
+            <p>Practical do's and don'ts for day-to-day AI tool usage.</p>
+          </article>
+          <article class="value-card">
+            <span class="icon">D</span>
+            <h3>Customer Disclosure</h3>
+            <p>Simple wording that small businesses can adapt for customers.</p>
+          </article>
+          <article class="value-card">
+            <span class="icon">V</span>
+            <h3>Vendor-Risk Summary</h3>
+            <p>Questions to ask third-party AI tools and embedded AI vendors.</p>
+          </article>
+          <article class="value-card">
+            <span class="icon">S</span>
+            <h3>Readiness Score</h3>
+            <p>A 0-100 score with a low, moderate, or high risk classification.</p>
+          </article>
+        </div>
+        <p class="disclaimer">
+          This MVP provides educational and planning support only. It is not
+          legal advice. Businesses should consult qualified legal or compliance
+          professionals before relying on any policy.
+        </p>
+      </section>
+
+      <section class="section how-section" id="how-it-works" aria-labelledby="how-title">
+        <div class="section-heading">
+          <span class="eyebrow">How it works</span>
+          <h2 id="how-title">From intake to investor-demo output</h2>
+        </div>
+        <div class="step-grid">
+          <div class="step"><span>1</span><p>Enter business AI-use details.</p></div>
+          <div class="step"><span>2</span><p>Express validates and scores risk signals.</p></div>
+          <div class="step"><span>3</span><p>Gemini generates a structured readiness report.</p></div>
+          <div class="step"><span>4</span><p>Export the report and rate usefulness.</p></div>
+        </div>
+      </section>
+
+      <section class="section pricing-section" id="pricing" aria-labelledby="pricing-title">
+        <div class="section-heading">
+          <span class="eyebrow">Business model</span>
+          <h2 id="pricing-title">Pricing model for the venture package</h2>
+          <p>
+            These demo plans show how RegReady AI could convert a free scan into
+            paid reports, monthly compliance support, and consultant accounts.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <span class="plan-name">Free Scan</span>
+            <strong>$0</strong>
+            <p>Basic readiness score and top risks</p>
+            <button class="button button-secondary pricing-button" type="button">
+              Start Free Scan
+            </button>
+          </article>
+          <article class="price-card featured-plan">
+            <span class="plan-name">Basic Report</span>
+            <strong>$29/report</strong>
+            <p>Downloadable AI-use policy, checklist, disclosure</p>
+            <button class="button button-primary pricing-button" type="button">
+              Upgrade Report
+            </button>
+          </article>
+          <article class="price-card">
+            <span class="plan-name">Monthly Plan</span>
+            <strong>$49-$99/month</strong>
+            <p>Policy updates, vendor reviews, employee guidance</p>
+            <button class="button button-secondary pricing-button" type="button">
+              Request Monthly Plan
+            </button>
+          </article>
+          <article class="price-card">
+            <span class="plan-name">Consultant Plan</span>
+            <strong>$199-$499/month</strong>
+            <p>Multiple client reports, templates, dashboard</p>
+            <button class="button button-secondary pricing-button" type="button">
+              Talk to Sales
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <section class="section market-section" id="market" aria-labelledby="market-title">
+        <div class="section-heading">
+          <span class="eyebrow">Target customer</span>
+          <h2 id="market-title">Market focus for the MVP</h2>
+        </div>
+        <div class="market-grid">
+          <article>
+            <h3>Target users</h3>
+            <p>
+              Small business owners, HR teams, marketing agencies, healthcare
+              offices, e-commerce stores, and consultants.
+            </p>
+          </article>
+          <article>
+            <h3>Beachhead market</h3>
+            <p>
+              Small-business consultants and agencies that manage AI policies,
+              readiness reports, and vendor reviews for multiple clients.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section trust-section" aria-labelledby="trust-title">
+        <div class="trust-panel">
+          <div>
+            <span class="eyebrow">Trust and scope</span>
+            <h2 id="trust-title">Educational planning support, not legal advice</h2>
+          </div>
+          <p>
+            RegReady AI is not legal advice. It provides educational compliance
+            planning support. Businesses should consult qualified legal, HR,
+            privacy, or compliance professionals before relying on any policy.
+          </p>
+        </div>
+      </section>
+
+      <section class="section scan-section" id="scan" aria-labelledby="scan-title">
+        <div class="section-heading">
+          <span class="eyebrow">Readiness intake</span>
+          <h2 id="scan-title">Start AI compliance readiness scan</h2>
+          <p>
+            Complete the fields below to generate a practical report for a
+            small-business owner.
+          </p>
+        </div>
+
+        <form class="intake-form" id="intakeForm">
+          <div class="form-actions form-actions-top">
+            <button class="button button-secondary" type="button" id="fillSampleButton">
+              Fill Random Sample
+            </button>
+            <button class="button button-ghost" type="reset">Clear Form</button>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              <span>Business Name</span>
+              <input
+                type="text"
+                name="businessName"
+                placeholder="BrightCare Clinic"
+                required
+              />
+            </label>
+
+            <label>
+              <span>Business Type</span>
+              <select name="businessType" required>
+                <option value="">Select business type</option>
+                <option>Retail / E-commerce</option>
+                <option>HR / Recruiting</option>
+                <option>Healthcare Office</option>
+                <option>Marketing Agency</option>
+                <option>Professional Services</option>
+                <option>Restaurant / Local Service</option>
+                <option>Education / Training</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Business Size</span>
+              <select name="businessSize" required>
+                <option value="">Select business size</option>
+                <option>1-5 employees</option>
+                <option>6-20 employees</option>
+                <option>21-50 employees</option>
+                <option>51-100 employees</option>
+                <option>100+ employees</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Biggest Concern</span>
+              <select name="biggestConcern" required>
+                <option value="">Select concern</option>
+                <option>Privacy</option>
+                <option>Bias or fairness</option>
+                <option>Copyright</option>
+                <option>Customer trust</option>
+                <option>Vendor risk</option>
+                <option>Employee misuse</option>
+                <option>Legal uncertainty</option>
+                <option>Data security</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+          </div>
+
+          <fieldset>
+            <legend>How does the business currently use AI?</legend>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="aiUses" value="Marketing content" /> Marketing content</label>
+              <label><input type="checkbox" name="aiUses" value="Hiring or job descriptions" /> Hiring or job descriptions</label>
+              <label><input type="checkbox" name="aiUses" value="Customer support replies" /> Customer support replies</label>
+              <label><input type="checkbox" name="aiUses" value="Email or message drafting" /> Email or message drafting</label>
+              <label><input type="checkbox" name="aiUses" value="Analytics or reporting" /> Analytics or reporting</label>
+              <label><input type="checkbox" name="aiUses" value="Product descriptions" /> Product descriptions</label>
+              <label><input type="checkbox" name="aiUses" value="Social media posts" /> Social media posts</label>
+              <label><input type="checkbox" name="aiUses" value="Appointment reminders" /> Appointment reminders</label>
+              <label><input type="checkbox" name="aiUses" value="Internal productivity" /> Internal productivity</label>
+              <label><input type="checkbox" name="aiUses" value="Other" /> Other</label>
+            </div>
+          </fieldset>
+
+          <div class="question-grid">
+            <fieldset class="radio-card">
+              <legend>Does the business enter customer personal data into AI tools?</legend>
+              <label><input type="radio" name="customerData" value="Yes" required /> Yes</label>
+              <label><input type="radio" name="customerData" value="No" /> No</label>
+              <label><input type="radio" name="customerData" value="Not sure" /> Not sure</label>
+            </fieldset>
+
+            <fieldset class="radio-card">
+              <legend>Do employees use public AI tools such as ChatGPT, Gemini, or Claude?</legend>
+              <label><input type="radio" name="publicAiTools" value="Yes" required /> Yes</label>
+              <label><input type="radio" name="publicAiTools" value="No" /> No</label>
+              <label><input type="radio" name="publicAiTools" value="Not sure" /> Not sure</label>
+            </fieldset>
+
+            <fieldset class="radio-card">
+              <legend>Is AI used for hiring, screening, employee evaluation, or HR decisions?</legend>
+              <label><input type="radio" name="hrDecisions" value="Yes" required /> Yes</label>
+              <label><input type="radio" name="hrDecisions" value="No" /> No</label>
+              <label><input type="radio" name="hrDecisions" value="Not sure" /> Not sure</label>
+            </fieldset>
+
+            <fieldset class="radio-card">
+              <legend>Is AI used to create customer-facing content?</legend>
+              <label><input type="radio" name="customerFacingContent" value="Yes" required /> Yes</label>
+              <label><input type="radio" name="customerFacingContent" value="No" /> No</label>
+              <label><input type="radio" name="customerFacingContent" value="Not sure" /> Not sure</label>
+            </fieldset>
+
+            <fieldset class="radio-card">
+              <legend>Does the business disclose AI-assisted content or communication to customers?</legend>
+              <label><input type="radio" name="disclosesAi" value="Yes" required /> Yes</label>
+              <label><input type="radio" name="disclosesAi" value="No" /> No</label>
+              <label><input type="radio" name="disclosesAi" value="Not sure" /> Not sure</label>
+            </fieldset>
+
+            <fieldset class="radio-card">
+              <legend>Does the business use third-party AI vendors or AI features inside other software?</legend>
+              <label><input type="radio" name="thirdPartyVendors" value="Yes" required /> Yes</label>
+              <label><input type="radio" name="thirdPartyVendors" value="No" /> No</label>
+              <label><input type="radio" name="thirdPartyVendors" value="Not sure" /> Not sure</label>
+            </fieldset>
+
+            <fieldset class="radio-card">
+              <legend>Does the business currently have a written AI-use policy?</legend>
+              <label><input type="radio" name="hasWrittenPolicy" value="Yes" required /> Yes</label>
+              <label><input type="radio" name="hasWrittenPolicy" value="No" /> No</label>
+              <label><input type="radio" name="hasWrittenPolicy" value="Not sure" /> Not sure</label>
+            </fieldset>
+          </div>
+
+          <label class="full-width">
+            <span>Additional notes</span>
+            <textarea
+              name="additionalNotes"
+              rows="5"
+              placeholder="Add any context about vendors, customer data, employee usage, or concerns."
+            ></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button class="button button-primary" type="submit" id="submitButton">
+              Generate Compliance Report
+            </button>
+            <p class="form-note">
+              Reports are generated by the backend and stored locally in JSON.
+            </p>
+          </div>
+        </form>
+      </section>
+
+      <section class="section report-section hidden" id="reportSection" aria-live="polite">
+        <div class="section-heading">
+          <span class="eyebrow">Generated report</span>
+          <h2>Compliance readiness report</h2>
+        </div>
+
+        <div class="loading-box hidden" id="loadingBox">
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Generating readiness report...</p>
+        </div>
+
+        <div class="error-box hidden" id="errorBox"></div>
+
+        <div class="report-output hidden" id="reportOutput">
+          <div class="report-dashboard">
+            <div class="score-card">
+              <div class="score-ring" id="scoreRing" aria-label="Overall readiness score">
+                <div class="score-ring-inner">
+                  <strong id="scoreNumber">--</strong>
+                  <span>/100</span>
+                </div>
+              </div>
+              <div class="score-card-copy">
+                <span class="score-label">Overall Readiness Score</span>
+                <h3 id="scoreHeadline">Compliance posture</h3>
+                <span id="riskBadge" class="risk-badge">Risk</span>
+              </div>
+            </div>
+
+            <div class="score-panel">
+              <div class="readiness-scale" aria-label="Readiness score scale">
+                <div class="scale-labels">
+                  <span>High risk</span>
+                  <span>Moderate</span>
+                  <span>Low risk</span>
+                </div>
+                <div class="scale-track">
+                  <span id="scoreMarker" class="score-marker"></span>
+                </div>
+              </div>
+              <p id="scoreExplanation">
+                Score reflects selected risk signals from the intake form.
+              </p>
+            </div>
+          </div>
+
+          <div class="insight-grid" aria-label="Report highlights">
+            <article class="insight-card">
+              <span class="insight-icon">D</span>
+              <div>
+                <span>Data Exposure</span>
+                <strong id="dataExposureInsight">Review needed</strong>
+              </div>
+            </article>
+            <article class="insight-card">
+              <span class="insight-icon">P</span>
+              <div>
+                <span>Policy Status</span>
+                <strong id="policyInsight">Review needed</strong>
+              </div>
+            </article>
+            <article class="insight-card">
+              <span class="insight-icon">V</span>
+              <div>
+                <span>Vendor Review</span>
+                <strong id="vendorInsight">Review needed</strong>
+              </div>
+            </article>
+          </div>
+
+          <div class="report-shell">
+            <div class="report-shell-header">
+              <div>
+                <span class="eyebrow">AI-generated deliverable</span>
+                <h3>Readiness report</h3>
+              </div>
+              <p>
+                Formatted for presentation, export, and small-business review.
+              </p>
+            </div>
+
+            <div class="report-actions">
+              <button class="button button-secondary" type="button" id="copyReportButton">
+                Copy Report
+              </button>
+              <button class="button button-secondary" type="button" id="downloadReportButton">
+                Download Report
+              </button>
+              <button class="button button-secondary" type="button" id="printReportButton">
+                Print
+              </button>
+              <button class="button button-ghost" type="button" id="newScanButton">
+                Generate New Scan
+              </button>
+            </div>
+
+            <article class="report-box" id="reportText"></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section feedback-section hidden" id="feedbackSection">
+        <div class="section-heading">
+          <span class="eyebrow">Tester feedback</span>
+          <h2>Rate report usefulness</h2>
+        </div>
+        <form class="feedback-form" id="feedbackForm">
+          <label>
+            <span>Rating</span>
+            <select name="rating" required>
+              <option value="">Select rating</option>
+              <option value="5">5 - Very useful</option>
+              <option value="4">4 - Useful</option>
+              <option value="3">3 - Somewhat useful</option>
+              <option value="2">2 - Limited usefulness</option>
+              <option value="1">1 - Not useful</option>
+            </select>
+          </label>
+          <label>
+            <span>Comment</span>
+            <textarea
+              name="comment"
+              rows="4"
+              placeholder="What would make this report more useful?"
+            ></textarea>
+          </label>
+          <button class="button button-primary" type="submit">Submit Feedback</button>
+          <p class="feedback-message" id="feedbackMessage"></p>
+        </form>
+      </section>
+
+      <section class="section architecture-section" id="architecture" aria-labelledby="architecture-title">
+        <div class="section-heading">
+          <span class="eyebrow">MVP architecture</span>
+          <h2 id="architecture-title">Business Intake -> AI Risk Analysis -> Readiness Score -> Policy Report -> Feedback</h2>
+        </div>
+        <div class="architecture-flow" aria-label="MVP architecture flow">
+          <span>Business Intake</span>
+          <span>AI Risk Analysis</span>
+          <span>Readiness Score</span>
+          <span>Policy Report</span>
+          <span>Feedback</span>
+        </div>
+      </section>
+    </main>
+
+    <div class="upgrade-toast hidden" id="upgradeToast" role="status" aria-live="polite">
+      <strong>Upgrade is in development.</strong>
+      <span>
+        This pricing flow is a demo. Email
+        <a href="mailto:sales@regready.ai">sales@regready.ai</a>
+        to request access.
+      </span>
+    </div>
+
+    <footer class="site-footer">
+      <p>RegReady AI MVP | Built for COMP630 Final MVP Demo</p>
+      <p>Educational planning support only. Not legal advice.</p>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
